@@ -1,0 +1,66 @@
+import React, {useState, useEffect} from 'react';
+
+function Create (){
+    const [userName, setUserName] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
+    const [error, setError] = useState([])
+    console.log(error)
+
+    function HandleCreate(e){
+        e.preventDefault()
+        fetch('/combatants', {
+          method: 'POST', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({username:userName, password:password, password_confirmation:confirmPassword}),
+        })
+          .then((response) =>{
+            if (response.ok){
+              response.json().then((data) => {
+              console.log('Success:', data);
+          })
+            }
+            else{
+              response.json().then((data) => {
+                setError(data)
+            })
+            }
+          }
+        )
+      }
+
+    return(
+
+        <form onSubmit={HandleCreate}>
+            <label>
+                Account Name
+                <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                />
+            </label>
+            <label>
+                Password
+                <input
+                    type="text"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            <label>
+                Confirm Password
+                <input
+                    type="text"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </label>
+            <button type="submit">Create Account</button>
+        </form>
+    )
+}
+export default Create
