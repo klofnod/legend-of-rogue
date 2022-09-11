@@ -16,8 +16,9 @@ class Game < ApplicationRecord
     end
 
     def select_enemy
-        last_num = enemies.length - 1
+        last_num = self.enemies.length - 1
         num = rand(0..last_num)
+
         enemies[num]        
     end
 end

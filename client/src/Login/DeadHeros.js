@@ -1,5 +1,6 @@
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import React, {useState, useEffect} from 'react';
+import './DeadHeros.css'
 
 
 function DeadHeros (){
@@ -18,13 +19,13 @@ function DeadHeros (){
       console.log(characters)
       const listOfFallen = characters.map((each)=>{
         return(
-            <div key={each.id}>
-            <h1>{each.name}</h1>
-            <p>{each.backstory}</p>
-            <p>Health:{each.health}</p>
-            <p>Power:{each.power}</p>
-            <p>Defence:{each.defence}</p>
-            <p>Killing Blow {each.last_round.plot}</p>
+            <div class='listOfCharas' key={each.id}>
+            <h1 class='charaName'>{each.name}</h1>
+            <p class='charaBackstory'>Backstory: {each.backstory}</p>
+            <p class='stat'>Health: {each.health}</p>
+            <p class='stat'>Power: {each.power}</p>
+            <p class='stat'>Defence: {each.defence}</p>
+            <p class='stat'>Killing Blow {each.last_round.plot}</p>
             </div>
         )
     })
@@ -33,7 +34,7 @@ function DeadHeros (){
 
     return(
         <div>
-            <h1>These Are The Ones Who Did Not Make It</h1>
+            <h1 id='deadHeader'>Death Is Nothing To Us. Since When We Are, Death Has Not Come, And When Death Comes We Are Not</h1>
             {listOfFallen}
         </div>
     )

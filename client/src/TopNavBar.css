@@ -1,0 +1,30 @@
+* {
+  background-color: rgb(238, 218, 189);
+}
+
+#tablink {
+  padding-left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  background-color: rgb(238, 218, 189);
+  color: white;
+  font-size: 17px;
+}
+.links:hover {
+  background-color: #777;
+}
+
+.links{
+  width: 100%;
+  padding-left: 200px;
+  padding-right: 200px;
+  text-align: center;
+  padding-bottom: 40px;
+  border: 5px solid #000000;
+  border-radius: 21px 0px 0px 0px;
+  border-bottom: 0px;
+}
+
+
+

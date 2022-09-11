@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
     def create
         user = Combatant.find_by(id: session[:user_id])
         if user
-            params[:power] = rand(1..5)
+            params[:power] = rand(3..5)
             params[:health] = rand(5..9)
             params[:defence] = rand(1..3)
     

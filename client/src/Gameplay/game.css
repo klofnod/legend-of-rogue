@@ -1,0 +1,49 @@
+.game{
+    height: 100%;
+    font-family: 'Cookie', cursive;
+    font-size: 40px;
+    margin-left: 0.15%;
+    margin-right: 0.15%;
+    position: relative;
+    border: 5px solid #000000;
+    margin-top: 40px;
+    border-spacing: 100px;
+}
+.game::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 22.5%;
+    top: -8px;
+    left: 76.45%;
+    border: 10px solid  rgb(238, 218, 189); ;
+}
+#adventureHeader{
+    text-align: center;
+}
+#adventureBoard{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 200px;
+}
+#charaStats{
+    margin-left: 20px;
+}
+#fight{
+    font-family: 'Alex Brush', cursive;
+    margin-left: 75%;
+    font-size: 50px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+#enemyStats{
+    margin-right: 20px;
+}
+#questChoice{
+    text-align: center;
+    padding-bottom: 700px;
+}
+#noUserFound{
+    text-align: center;
+    padding-bottom: 800px;
+}

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import './Create.css'
 
 function Create (){
     const [userName, setUserName] = useState("")
@@ -33,11 +34,12 @@ function Create (){
       }
 
     return(
-
+      <div id='createAccount'>
+        <h1>Create An Account And Begin Your Adventures.</h1>
         <form onSubmit={HandleCreate}>
             <label>
                 Account Name
-                <input
+                <input class='createInput'
                     type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
@@ -45,22 +47,23 @@ function Create (){
             </label>
             <label>
                 Password
-                <input
-                    type="text"
+                <input class='createInput'
+                    type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </label>
             <label>
                 Confirm Password
-                <input
-                    type="text"
+                <input class='createInput'
+                    type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
             </label>
-            <button type="submit">Create Account</button>
+            <button id='createAccountButton' type="submit">Create Account</button>
         </form>
+      </div>
     )
 }
 export default Create

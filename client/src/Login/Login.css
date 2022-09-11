@@ -1,0 +1,103 @@
+.login{
+    margin-left: 0.15%;
+    margin-right: 0.15%;
+    position: relative;
+    border: 5px solid #000000;
+    margin-top: 40px;
+    border-spacing: 100px;
+    padding-top: 100px;
+}
+.login::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 422px;
+    top: -8px;
+    left: 459px;
+    border: 10px solid  rgb(238, 218, 189); ;
+}
+#loginScreen{
+    font-size: 50px;
+    font-family: 'Alex Brush', cursive;
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    padding-bottom: 900px;
+}
+#topButtons{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+#loginHeader{
+    font-family: 'Alex Brush', cursive;
+    font-size: 45px;
+    text-align: center;
+}
+#logout{
+
+    font-family: 'Cookie', cursive;
+    font-size: 60px ;
+    cursor: pointer;
+
+}
+#fallen{
+
+    height: 100%;
+    font-family: 'Cookie', cursive;
+    font-size: 60px ;
+    cursor: pointer;
+}
+#createCharaForm{
+    display: grid;
+    font-family: 'Cookie', cursive;
+    width: 25%;
+    margin-left: 40%;
+}
+.inputField{
+    font-family: 'Cookie', cursive;
+    font-size: 24px;
+}
+#backstory{
+    text-align: justify;
+    min-height:200px;
+
+}
+#createCharaButton{
+    font-size: 30px;
+    font-family: 'Cookie', cursive;
+    cursor: pointer;
+}
+.listOfCharas{
+    word-wrap: break-word;
+    padding-bottom: 5%;
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-family: 'Cookie', cursive;
+    color: aliceblue;
+    background-color: #1728c2;
+    border: 33px outset #c02929;
+    border-radius: 49px 49px 49px 49px;
+    -moz-border-radius: 49px 49px 49px 49px;
+    -webkit-border-radius: 49px 49px 49px 49px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+}
+.charaName{
+    background: local;
+    text-align: center;
+    font-size: 60px;
+}
+.charaBackstory{
+    font-size: 50px;
+    background: local;
+    text-align: center;
+}
+.stat{
+    background: local;
+    font-size: 40px;
+    padding-left: 35%;
+}

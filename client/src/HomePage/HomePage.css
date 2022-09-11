@@ -1,0 +1,33 @@
+#header {
+    font-size: 100px;
+    text-align: center;
+    padding-top: 100px;
+    font-family: 'Alex Brush', cursive;
+}
+#warning{
+    font-size: 70px;
+    text-align: center;
+    font-family: 'Alex Brush', cursive;
+}
+#mainBlurb{
+    padding: 30px;
+    font-size: 40px;
+    font-family: 'Cookie', cursive;
+}
+.wholePage{
+    margin-left: 0.15%;
+    margin-right: 0.15%;
+    position: relative;
+    border: 5px solid #000000;
+    margin-top: 40px;
+    border-spacing: 100px;
+}
+.wholePage::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 22.6%;
+    top: -8px;
+    left: 0px;
+    border: 10px solid  rgb(238, 218, 189); ;
+}

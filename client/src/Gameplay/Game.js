@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link, useMatch } from 'react-router-dom'
+import GameBoard from '../GameBoard';
+import './game.css'
 
 
 function Game (){
 
-    const [loot, setLoot] = useState([])
-    const [characters, setCharacters] = useState([])
-    const [gameData , setGameData] = useState([])
     const [loggedInUser, setLoggedInUser] = useState(null)
+    const [characters, setCharacters] = useState([])
+    const [loot, setLoot] = useState([])
+    const [gameData , setGameData] = useState([])
     const [error, setError] = useState([])
 
     console.log(gameData)
@@ -39,7 +41,7 @@ function Game (){
         { label: 'Save The Princess', value: '3' },
     ];
 
-    const handleChange = (event) => {
+    const startGame = (event) => {
         event.preventDefault()
         console.log(event.target.form[0].value, event.target.form[1].value);
         fetch('/current_rounds', {
@@ -53,6 +55,7 @@ function Game (){
             if (response.ok){
               response.json().then((data) => {
               setGameData(data)
+
           })
             }
             else{
@@ -60,6 +63,7 @@ function Game (){
                 setError(data)
             })
             }
+
           }
         )
     };
@@ -69,13 +73,15 @@ function Game (){
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({game_id:gameData[0].game.id, character_id:gameData[0].character.id, enemy_id: gameData[1].id}),
+        body: JSON.stringify({game_id:gameData.game.id, character_id:gameData.character.id, encounter_id:gameData.encounter.id}),
       })
       .then((response) =>{
         if (response.ok){
           response.json().then((data) => {
-          setGameData(data)
-          setLoot(data[2].gear)
+         setGameData(data)
+          //setActiveCharacter(data.character)
+          //setEncounter(data.encounter)
+          
       })
         }
         else{
@@ -94,7 +100,7 @@ function Game (){
       if (gameData.length < 1){
         return(
          
-            <div>
+            <div id='questChoice'>
                 <h1>where it starts</h1>
                 <form>
                 <label>
@@ -113,25 +119,27 @@ function Game (){
                         ))}
                     </select>
                 </label>
-                <button onClick={handleChange}>Start Game</button>
+                <button onClick={startGame}>Start Game</button>
                 </form>
             </div>
         )
       }
         else {
-          console.log(loot)
-          if (gameData[0].character.health > 0 && gameData[0].game.round < 12){
+          if (gameData.character.health > 0 && gameData.game.round < 12){
             return(
               <div>
-              <h1>{gameData[0].character.name} adventure</h1>
-              <h2>health: {gameData[0].character.health} Power: {gameData[0].character.power} Defence: {gameData[0].character.defence}</h2>
-              <p>{gameData[0].encounter.plot} {gameData[1].name}</p>
-              <button type='button' onClick={turnAdvance}>Continue</button>
-              <p>{loot.name}</p>
+              <h1 id='adventureHeader'>{gameData.character.name}'s adventure</h1>
+              <div id='adventureBoard'>
+              <h2 id='charaStats'>Your Stats: <br/>health: {gameData.character.health}<br/> Defence: {gameData.character.defence}<br/> Power: {gameData.character.power}</h2>
+              <p>{gameData.encounter.plot} {gameData.encounter.selected_enemy.name} </p>
+              <p id='enemyStats'>Enemy Stats: <br/> health: {gameData.encounter.selected_enemy.health}<br/> Defence: {gameData.encounter.selected_enemy.defence}<br/> Power: {gameData.encounter.selected_enemy.power} </p>
+          
+              </div>
+                  <button id='fight' type='button' onClick={turnAdvance}>Continue</button>
               </div>
             )
           }
-          else if (gameData[0].character.health > 0 && gameData[0].game.round == 12){
+          else if (gameData.character.health > 0 && gameData.game.round == 12){
             return(
               <div>
                 <p>you won</p>
@@ -151,13 +159,16 @@ function Game (){
 
     function ifNoUserFound(){
         return(
-            <h1>please login to play game</h1>
+          <div id='noUserFound'>
+            <h1 >Please Login To Play Legend Of Rogue</h1>
+            <h2>In Order To Track Your Progress, The Game Needs An Account To Link The Characters To.<br/> Making An Account Is Free! Head Over To Create Account And Get Started</h2>
+          </div>
         )
     }
     
 
     return(
-        <div>
+        <div class='game'>
             {loggedInUser ? ifLoggedIn(): ifNoUserFound()}
         </div>
     )

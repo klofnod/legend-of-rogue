@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import DeadHeros from './DeadHeros';
+import './Login.css'
 
 function Login(){
     const [userName, setUserName] = useState("")
@@ -59,7 +60,8 @@ function Login(){
     
     function loginButton (){
         return(
-            <div>
+            <div id='loginScreen'>
+              <h2>Login Here To Begin Your Adventures</h2>
             <form onSubmit={HandleLogin}>
             <input
               type="text"
@@ -79,7 +81,6 @@ function Login(){
 
     const [loot, setLoot] = useState([])
     function chestSpawn(e){
-      console.log(e)
         fetch('/chests', {
           method: 'POST', 
           headers: {
@@ -129,22 +130,26 @@ function Login(){
           )
           }
         return(
-            <div>
-            <button onClick={handleLogout}>Logout</button> 
-            <form onSubmit={CreateCharacter}>
-            <input
+            <div >
+              <div id='topButtons'>
+            <Link to="Fallen">
+              <button id='fallen' type='button'>Fallen Heros</button>
+            </Link>
+            <h1 id='loginHeader'>Create And View Alive Characters</h1>
+            <button id='logout' onClick={handleLogout}>Logout</button>
+            </div>
+            <form id='createCharaForm' onSubmit={CreateCharacter}>
+            <input class='inputField'
               type="text"
-              name="name"
+              name="characterName"
             />
-            <input
+            <textarea class='inputField' id='backstory'
               type="text"
               name="backstory"
             />
-            <button type='submit'>Create Character</button>
+            <button id='createCharaButton' type='submit'>Create Character</button>
           </form>
-          <Link to="Fallen">
-            <button type='button'>Fallen Heros</button>
-          </Link>
+
           <Routes>
               <Route path="Fallen" element={<DeadHeros />} />
             </Routes>
@@ -164,12 +169,12 @@ function Login(){
 
     const ListOfAlive = characters.map((each)=>{
         return(
-            <div key={each.id}>
-            <h1>{each.name}</h1>
-            <p>{each.backstory}</p>
-            <p>Health:{each.health}</p>
-            <p>Power:{each.power}</p>
-            <p>Defence:{each.defence}</p>
+            <div class='listOfCharas' key={each.id}>
+            <h1 class='charaName'>{each.name}</h1>
+            <p class='charaBackstory'>Backstory: {each.backstory}</p>
+            <p class='stat'>Health: {each.health}</p>
+            <p class='stat'>Power: {each.power}</p>
+            <p class='stat'>Defence: {each.defence}</p>
             <button name={each.id} onClick={chestSpawn}>chest</button>
             </div>
         )
@@ -184,7 +189,7 @@ function Login(){
     return(
 
 
-        <div className="App">
+        <div class="login">
 
             {loggedInUser ? LogoutButton() : loginButton()}
             {ListOfAlive}

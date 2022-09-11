@@ -3,23 +3,33 @@ class CurrentRoundsController < ApplicationController
 
     def create
         round = CurrentRound.create(character_id: params[:character_id], game_id: params[:game_id], encounter_id: rand(1..5))
+        enemy = round.game.select_enemy
+        round.encounter.update(enemy:enemy.id)
         round.game.set_round_on_start
-        enemies = round.game.select_enemy
-        render json: [round, enemies]
+
+        render json: round
     end
 
     def nextTurn
-
-        bad_guy = Enemy.find(params[:enemy_id])
-        character = Character.find(params[:character_id])
-        character.health_change(bad_guy)
-        loot = Chest.create(gear_id:rand(1..10), character_id:params[:character_id], rarity:"normal")
-        loot.stat_increase(character)
+        previous_round = Encounter.find(params[:encounter_id]).enemy
+        
         round = CurrentRound.create(character_id: params[:character_id], game_id: params[:game_id], encounter_id: rand(1..5))
+        enemy = round.game.select_enemy
+        round.character.health_change(Enemy.find(previous_round))
+        round.character.chest_spawn
         round.game.round_increment
-        enemies = round.game.select_enemy
+        
+        round.encounter.update(enemy:enemy.id)
         
         
-        render json: [round, enemies, loot]
+        #loot = Chest.create(gear_id:rand(1..10), character_id:params[:character_id], rarity:"normal")
+        #loot.stat_increase(character)
+        #character.chest_spawn
+        #character.health_change(enemy)
+        
+        
+        
+        
+        render json: round
     end
 end
