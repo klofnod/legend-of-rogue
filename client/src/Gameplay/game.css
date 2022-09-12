@@ -8,6 +8,8 @@
     border: 5px solid #000000;
     margin-top: 40px;
     border-spacing: 100px;
+    padding-bottom: 600px;
+    text-align: center;
 }
 .game::after{
     content: '';
@@ -29,13 +31,6 @@
 #charaStats{
     margin-left: 20px;
 }
-#fight{
-    font-family: 'Alex Brush', cursive;
-    margin-left: 75%;
-    font-size: 50px;
-    margin-bottom: 50px;
-    cursor: pointer;
-}
 #enemyStats{
     margin-right: 20px;
 }
@@ -46,4 +41,29 @@
 #noUserFound{
     text-align: center;
     padding-bottom: 800px;
+}
+#bottomInfoAndActions{
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+}
+#lootReadOut{
+    text-align: center;
+    font-family: 'Cookie', cursive;
+}
+.actionButtons{
+    width: 20%;
+    font-family: 'Alex Brush', cursive;
+    font-size: 50px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+#encounterText{
+    text-align: center;
+    max-width: 50%;
+}
+.gameoverText{
+    display: inline-grid;
+    text-align: center;
+    max-width: 50%;
 }

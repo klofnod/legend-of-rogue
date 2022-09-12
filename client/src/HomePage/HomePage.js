@@ -2,7 +2,7 @@ import './HomePage.css'
 
 function HomePage (){
     return(
-        <div class='wholePage'>
+        <div className='wholePage'>
         <h1 id='header'>Welcome Adventurers To <br/> LEGEND OF ROGUE</h1>
         <h1 id='warning'>Be Wary On These Adventures And Keep Your Wits About You</h1>
         <h2 id='mainBlurb'>This is a mini Rogue-like game I created for my capstone project while in Flatiron. I took inspiration from old text-based adventure games I played as a kid,

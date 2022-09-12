@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import DeadHeros from './DeadHeros';
 import './Login.css'
+import logo from '../ArtAssets/v2.gif'
 
 function Login(){
     const [userName, setUserName] = useState("")
@@ -139,11 +140,11 @@ function Login(){
             <button id='logout' onClick={handleLogout}>Logout</button>
             </div>
             <form id='createCharaForm' onSubmit={CreateCharacter}>
-            <input class='inputField'
+            <input className='inputField'
               type="text"
               name="characterName"
             />
-            <textarea class='inputField' id='backstory'
+            <textarea className='inputField' id='backstory'
               type="text"
               name="backstory"
             />
@@ -169,12 +170,12 @@ function Login(){
 
     const ListOfAlive = characters.map((each)=>{
         return(
-            <div class='listOfCharas' key={each.id}>
-            <h1 class='charaName'>{each.name}</h1>
-            <p class='charaBackstory'>Backstory: {each.backstory}</p>
-            <p class='stat'>Health: {each.health}</p>
-            <p class='stat'>Power: {each.power}</p>
-            <p class='stat'>Defence: {each.defence}</p>
+            <div className='listOfCharas' key={each.id} style={{ backgroundImage:`url(${logo})` }} >
+            <h1 className='charaName'>{each.name}</h1>
+            <p className='charaBackstory'>Backstory: {each.backstory}</p>
+            <p className='stat'>Health: {each.health}</p>
+            <p className='stat'>Power: {each.power}</p>
+            <p className='stat'>Defence: {each.defence}</p>
             <button name={each.id} onClick={chestSpawn}>chest</button>
             </div>
         )
@@ -189,7 +190,7 @@ function Login(){
     return(
 
 
-        <div class="login">
+        <div className="login">
 
             {loggedInUser ? LogoutButton() : loginButton()}
             {ListOfAlive}

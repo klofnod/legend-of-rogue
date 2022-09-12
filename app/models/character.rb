@@ -17,18 +17,43 @@ class Character < ApplicationRecord
     enemy_defence = (enemy.defence/100.to_f) * power
     damage_dealt = power - enemy_defence
 
-    while  (bad_health - damage_dealt).to_i > 0
-      bad_health = bad_health - power
+
+    while  (bad_health - damage_dealt).round > 0
+
+      bad_health = bad_health - damage_dealt
       percent =  (defence/100.to_f) * enemy.power
       incoming_damage = enemy.power - percent
       health_change = health - incoming_damage
       update(health: health_change)
 
-
     end
   end
 
+  def flee_attempt(enemy)
+    if  power > enemy.power
+      diffrence = (power - enemy.power)/power.to_f*100
+      if (rand(100)-diffrence > 0)
+        percent =  (defence/100.to_f) * enemy.power
+        incoming_damage = enemy.power - percent
+        health_change = health - incoming_damage
+        update(health: health_change)
+      end
+
+     elsif power < enemy.power
+      diffrence = (enemy.power- (enemy.power - power))/enemy.power.to_f*100
+      if(rand(100)-diffrence > 0)
+        percent =  (defence/100.to_f) * enemy.power
+        incoming_damage = enemy.power - percent
+        health_change = health - incoming_damage
+        update(health: health_change)
+      end
+
+    end
+    
+  end
+
   def chest_spawn
+    byebug
     gear = Chest.create(gear_id:rand(1..10), character_id:self.id, rarity:"normal").gear
     num = gear.power
     if gear.effect == "damage"
@@ -44,6 +69,7 @@ class Character < ApplicationRecord
       updef = defence + num
       update(defence: updef)
   end
+    gear
   end
 
 

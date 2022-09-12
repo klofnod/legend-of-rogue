@@ -19,13 +19,13 @@ function DeadHeros (){
       console.log(characters)
       const listOfFallen = characters.map((each)=>{
         return(
-            <div class='listOfCharas' key={each.id}>
-            <h1 class='charaName'>{each.name}</h1>
-            <p class='charaBackstory'>Backstory: {each.backstory}</p>
-            <p class='stat'>Health: {each.health}</p>
-            <p class='stat'>Power: {each.power}</p>
-            <p class='stat'>Defence: {each.defence}</p>
-            <p class='stat'>Killing Blow {each.last_round.plot}</p>
+            <div className='listOfCharas' key={each.id}>
+            <h1 className='charaName'>{each.name}</h1>
+            <p className='charaBackstory'>Backstory: {each.backstory}</p>
+            <p className='stat'>Health: {each.health}</p>
+            <p className='stat'>Power: {each.power}</p>
+            <p className='stat'>Defence: {each.defence}</p>
+            <p className='stat'>Killing Blow {each.last_round.plot}</p>
             </div>
         )
     })

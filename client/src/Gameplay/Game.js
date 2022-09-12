@@ -8,11 +8,11 @@ function Game (){
 
     const [loggedInUser, setLoggedInUser] = useState(null)
     const [characters, setCharacters] = useState([])
-    const [loot, setLoot] = useState([])
+    const [loot, setLoot] = useState({})
     const [gameData , setGameData] = useState([])
     const [error, setError] = useState([])
 
-    console.log(gameData)
+    console.log(loot)
     useEffect(() => {
         fetch("/userInSession").then((response) => {
           if (response.ok) {
@@ -78,6 +78,33 @@ function Game (){
       .then((response) =>{
         if (response.ok){
           response.json().then((data) => {
+          setLoot(data[1])
+         setGameData(data[0])
+          //setActiveCharacter(data.character)
+          //setEncounter(data.encounter)
+          
+      })
+        }
+        else{
+          response.json().then((data) => {
+            setError(data)
+        })
+        }
+      }
+    )
+    }
+    function flee(){
+      fetch('/flee', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({game_id:gameData.game.id, character_id:gameData.character.id, encounter_id:gameData.encounter.id}),
+      })
+      .then((response) =>{
+        if (response.ok){
+          response.json().then((data) => {
+          setLoot({})
          setGameData(data)
           //setActiveCharacter(data.character)
           //setEncounter(data.encounter)
@@ -92,9 +119,9 @@ function Game (){
       }
     )
     }
-
-
-
+    const LootInfo = (
+      <p id='lootReadOut'>You Received A {loot.name} <br/>A {loot.power} point increase to {loot.effect}</p>
+    )
 
     function ifLoggedIn(){
       if (gameData.length < 1){
@@ -125,31 +152,35 @@ function Game (){
         )
       }
         else {
-          if (gameData.character.health > 0 && gameData.game.round < 12){
+          if (gameData.character.health > 0 && gameData.game.round < 13){
             return(
               <div>
               <h1 id='adventureHeader'>{gameData.character.name}'s adventure</h1>
               <div id='adventureBoard'>
               <h2 id='charaStats'>Your Stats: <br/>health: {gameData.character.health}<br/> Defence: {gameData.character.defence}<br/> Power: {gameData.character.power}</h2>
-              <p>{gameData.encounter.plot} {gameData.encounter.selected_enemy.name} </p>
+              <p id='encounterText'>{gameData.encounter.plot} {gameData.encounter.selected_enemy.name} </p>
               <p id='enemyStats'>Enemy Stats: <br/> health: {gameData.encounter.selected_enemy.health}<br/> Defence: {gameData.encounter.selected_enemy.defence}<br/> Power: {gameData.encounter.selected_enemy.power} </p>
-          
+              
               </div>
-                  <button id='fight' type='button' onClick={turnAdvance}>Continue</button>
+                <div id='bottomInfoAndActions'>
+                  <button className='actionButtons'  type='button' onClick={flee}>Flee</button>
+                  {Object.keys(loot).length > 0 ? LootInfo : null}
+                  <button className='actionButtons' type='button' onClick={turnAdvance}>Continue</button>
+                  </div>
               </div>
             )
           }
-          else if (gameData.character.health > 0 && gameData.game.round == 12){
+          else if (gameData.character.health > 0 && gameData.game.round === 13){
             return(
               <div>
-                <p>you won</p>
+                <h1 className='gameoverText'>You Are Victorious <br/> Congratulations your hero has seized the day and conquered this adventure. Try your luck at another or let your hero rest, the choice is yours </h1>
               </div>
             )
           }
           else{
             return(
               <div>
-                <h1>gameover</h1>
+                <h1 className='gameoverText'>Your Hero Falls And Your Adventure Is Over. Head Back To Login To Create A New Character</h1>
               </div>
             )
           }
@@ -168,7 +199,7 @@ function Game (){
     
 
     return(
-        <div class='game'>
+        <div className='game'>
             {loggedInUser ? ifLoggedIn(): ifNoUserFound()}
         </div>
     )

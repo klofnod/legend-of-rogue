@@ -15,21 +15,21 @@ function TopNavBar (){
 
     return(
     <Router>
-    <div class="wrapper">
+    <div className="wrapper">
 
 
     <ul id='tablink'>      
-        <li class='link'>
-            <Link to="/" class='links'>Home</Link>
+        <li className='link'>
+            <Link to="/" className='links'>Home</Link>
         </li>
-        <li class='link'>
-            <Link to="Login" class='links'>Login</Link>
+        <li className='link'>
+            <Link to="Login" className='links'>Login</Link>
         </li>
-        <li class='link'>
-            <Link to="Create" class='links'>Create Account</Link>
+        <li className='link'>
+            <Link to="Create" className='links'>Create Account</Link>
         </li>
-        <li class='link'>
-            <Link to="Game" class='links'>Game</Link>
+        <li className='link'>
+            <Link to="Game" className='links'>Game</Link>
         </li>
     </ul>
 
@@ -37,7 +37,7 @@ function TopNavBar (){
     <Routes>
 
         <Route exact path="/"      element={<HomePage />}/>
-        <Route exact path="Login" element={<Login />}>
+        <Route exact path="Login/*" element={<Login />}>
             <Route path="Fallen" element={<DeadHeros />} />
         </Route>
         <Route exact path="Create" element={<Create />}/>

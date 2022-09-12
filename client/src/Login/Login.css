@@ -75,8 +75,9 @@
     margin-left: 20%;
     margin-right: 20%;
     font-family: 'Cookie', cursive;
-    color: aliceblue;
-    background-color: #1728c2;
+    color: rgb(0, 0, 0);
+    background-position: center bottom;
+    background-size: 100% 110%;
     border: 33px outset #c02929;
     border-radius: 49px 49px 49px 49px;
     -moz-border-radius: 49px 49px 49px 49px;
