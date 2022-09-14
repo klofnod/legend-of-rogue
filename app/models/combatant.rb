@@ -2,7 +2,9 @@ class Combatant < ApplicationRecord
     has_many :characters
     has_secure_password
 
-    validates :username, presence: true, uniqueness: true
+    validates :username, presence: true, uniqueness: true,  length: { minimum: 2 }
+
+
 
     def select_alive
         characters.where(["health > 0"]).sort { |a,b| a.id <=> b.id }
@@ -15,6 +17,7 @@ class Combatant < ApplicationRecord
    
 
     def password=(new_password)
+
         salt = BCrypt::Engine::generate_salt
         self.password_digest = BCrypt::Engine::hash_secret(new_password, salt)
     end

@@ -53,11 +53,12 @@ class Character < ApplicationRecord
   end
 
   def chest_spawn
-    byebug
-    gear = Chest.create(gear_id:rand(1..10), character_id:self.id, rarity:"normal").gear
+
+    gear = Chest.create(gear_id:rand(1..9), character_id:id, rarity:"normal").gear
     num = gear.power
     if gear.effect == "damage"
       
+      gear.update(power:rand(4..7))
       upnum = power + num
       update(power: upnum)
   elsif gear.effect == "health"

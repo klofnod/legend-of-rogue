@@ -26,12 +26,16 @@
 #adventureBoard{
     display: flex;
     justify-content: space-between;
-    padding-bottom: 200px;
+
 }
 #charaStats{
+    color: #0b2cec;
+    width: 25%;
     margin-left: 20px;
 }
 #enemyStats{
+    color: #c02929;
+    width: 25%;
     margin-right: 20px;
 }
 #questChoice{
@@ -43,6 +47,8 @@
     padding-bottom: 800px;
 }
 #bottomInfoAndActions{
+    padding-left: 3%;
+    padding-right: 3%;
     display: flex;
     justify-content: space-between;
     align-content: space-between;
@@ -59,11 +65,29 @@
     cursor: pointer;
 }
 #encounterText{
+    text-shadow: rgb(243, 38, 11) 1px 0 10px;
+    height: 300px;
     text-align: center;
-    max-width: 50%;
+    max-width: 80%;
 }
 .gameoverText{
     display: inline-grid;
     text-align: center;
     max-width: 50%;
+}
+#gameBoard{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.storyImage{
+    max-width: 80%;
+    max-width: 80%;
+}
+#fightButton{
+    cursor: url('../ArtAssets/cursor-pointer-25.png')55 55, pointer;	
+}
+#fleeButton{
+    cursor: url('../ArtAssets/cursor-direction-19.png')55 55, pointer;
 }

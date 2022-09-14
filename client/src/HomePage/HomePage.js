@@ -1,4 +1,5 @@
 import './HomePage.css'
+import waterLake from '../ArtAssets/WaterLake2.png'
 
 function HomePage (){
     return(

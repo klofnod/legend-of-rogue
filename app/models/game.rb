@@ -19,23 +19,31 @@ class Game < ApplicationRecord
 
         enemy_list = enemies.sort{|a,b|a.power<=>b.power}
         not_boss = (enemies.length - 2)
-        half = (not_boss/2).round
+        half = (enemy_list.length/2)
         easy = enemies.length/half
             case encounter.setting
-                
+
                 when 'early'
                     num = rand(0..easy)
                     enemy_list[num]
 
-                when 'middle'
+                when 'transitionMiddle'
+                    enemy_list[4]
 
+                when 'middle'
+  
                     num = rand(easy..half)
-                    enemies[num]
+                    enemy_list[num]
+
+                when 'transitionLate'
+                    enemy_list[6]
 
                 when 'late'
-
                     num= rand(half..not_boss)
-                    enemies[num]
+                    enemy_list[num]
+
+                when 'transitionBoss'
+                    enemy_list[7]
 
                 when 'boss'
                     enemy_list.last

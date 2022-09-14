@@ -2,7 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link, useMatch } from 'react-router-dom'
 import GameBoard from '../GameBoard';
 import './game.css'
-
+import earlyGame from '../ArtAssets/Clearing3.png'
+import earlyTransition from '../ArtAssets/CastleRuins2.png'
+import middleGame from '../ArtAssets/Ruins3.png'
+import middleTransition from '../ArtAssets/CastleStaircase1.png'
+import lateGame from '../ArtAssets/CastleHallway.png'
+import bossTransition from '../ArtAssets/CastleTower.png'
+import boss from '../ArtAssets/CastleThroneRoom1.png'
 
 function Game (){
 
@@ -12,7 +18,7 @@ function Game (){
     const [gameData , setGameData] = useState([])
     const [error, setError] = useState([])
 
-    console.log(loot)
+    console.log(gameData)
     useEffect(() => {
         fetch("/userInSession").then((response) => {
           if (response.ok) {
@@ -120,11 +126,46 @@ function Game (){
     )
     }
     const LootInfo = (
-      <p id='lootReadOut'>You Received A {loot.name} <br/>A {loot.power} point increase to {loot.effect}</p>
+      <p id='lootReadOut'>You Received <br/> A {loot.name} <br/>A {loot.power} point increase <br/> to {loot.effect}</p>
     )
-
+        function StoryImage(){ 
+          switch(gameData.encounter.setting){
+            case 'early':
+              return(
+                <img src={earlyGame} className='storyImage'/>
+              )
+            case 'transitionMiddle':
+              return(
+                <img src={earlyTransition} className='storyImage'/>
+              )
+            case 'middle':
+              return(
+                <img src={middleGame} className='storyImage'/>
+              )
+            case 'transitionLate':
+              return(
+                <img src={middleTransition} className='storyImage'/>
+              )
+            case 'late':
+              return(
+                <img src={lateGame} className='storyImage'/>
+              )
+            case 'transitionBoss':
+              return(
+                <img src={bossTransition} className='storyImage'/>
+              )
+            case 'boss':
+              return(
+                <img src={boss} className='storyImage'/>
+              )
+           
+        }
+      }
     function ifLoggedIn(){
       if (gameData.length < 1){
+  
+
+      
         return(
          
             <div id='questChoice'>
@@ -157,15 +198,18 @@ function Game (){
               <div>
               <h1 id='adventureHeader'>{gameData.character.name}'s adventure</h1>
               <div id='adventureBoard'>
-              <h2 id='charaStats'>Your Stats: <br/>health: {gameData.character.health}<br/> Defence: {gameData.character.defence}<br/> Power: {gameData.character.power}</h2>
-              <p id='encounterText'>{gameData.encounter.plot} {gameData.encounter.selected_enemy.name} </p>
-              <p id='enemyStats'>Enemy Stats: <br/> health: {gameData.encounter.selected_enemy.health}<br/> Defence: {gameData.encounter.selected_enemy.defence}<br/> Power: {gameData.encounter.selected_enemy.power} </p>
+              <h2 id='charaStats'>Your Stats: <br/>health: {gameData.character.health}<br/> Defence: {gameData.character.defence}<br/> Power: {gameData.character.power} <br/>{Object.keys(loot).length > 0 ? LootInfo : null} </h2>
+              <div id='gameBoard'>
+              <p id='encounterText'>{gameData.encounter.plot} {gameData.encounter.selected_enemy.name}. You see {gameData.encounter.selected_enemy.description} </p>
+               {StoryImage()}
+              </div>
+              <h2 id='enemyStats'>Enemy Stats: <br/> health: {gameData.encounter.selected_enemy.health}<br/> Defence: {gameData.encounter.selected_enemy.defence}<br/> Power: {gameData.encounter.selected_enemy.power} </h2>
               
               </div>
                 <div id='bottomInfoAndActions'>
-                  <button className='actionButtons'  type='button' onClick={flee}>Flee</button>
-                  {Object.keys(loot).length > 0 ? LootInfo : null}
-                  <button className='actionButtons' type='button' onClick={turnAdvance}>Continue</button>
+                  {(gameData.game.round < 12) ?<button id='fleeButton' className='actionButtons'  type='button' onClick={flee}>Flee</button>: null }
+                  
+                  <button id='fightButton' className='actionButtons' type='button' onClick={turnAdvance}>Fight</button>
                   </div>
               </div>
             )

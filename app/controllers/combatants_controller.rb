@@ -19,6 +19,7 @@ class CombatantsController < ApplicationController
     end
 
     def alive
+
         characters = Combatant.find_by(id: session[:user_id]).select_alive
         render json: characters
     end

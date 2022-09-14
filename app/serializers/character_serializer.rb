@@ -4,8 +4,9 @@ class CharacterSerializer < ActiveModel::Serializer
 
 
   def last_round
+
     if object.current_rounds.length > 1 
-      object.current_rounds.max{|a,b| b.id <=> a.id }.encounter
+      object.current_rounds.max{|a,b| a.id <=> b.id }.encounter
     end
   end
 

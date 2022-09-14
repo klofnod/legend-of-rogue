@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter, BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import DeadHeros from './DeadHeros';
 import './Login.css'
-import logo from '../ArtAssets/v2.gif'
+
 
 function Login(){
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
-   
+    const [characterName, setCharacterName] = useState('')
     const [characters, setCharacters] = useState([])
     const [loggedInUser, setLoggedInUser] = useState(null)
-    const [error, setError] = useState([])
+    const [errors, setErrors] = useState([])
   console.log(loggedInUser)
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function Login(){
       }, []);
 
     function HandleLogin(e){
-  
+      console.log(e)
       e.preventDefault()
       fetch('/login', {
         method: 'POST', 
@@ -37,11 +37,13 @@ function Login(){
         if (response.ok){
           response.json().then((data) => {
           setLoggedInUser(data)
+          setUserName('')
+          setPassword('')
       })
         }
         else{
           response.json().then((data) => {
-            setError(data)
+            setErrors(data)
         })
         }
       }
@@ -60,22 +62,27 @@ function Login(){
         }
     
     function loginButton (){
+  
         return(
             <div id='loginScreen'>
-              <h2>Login Here To Begin Your Adventures</h2>
-            <form onSubmit={HandleLogin}>
+              <h2 id='test'>Login Here To Begin Your Adventures</h2>
+            <form id='loginMenu' onSubmit={HandleLogin}>
+
+
             <input
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
+
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+          <input type="submit" value="Login" />
           </form>
+          <p>{errors.error}</p>
           </div>
         )
     }
@@ -97,7 +104,7 @@ function Login(){
           }
           else{
             response.json().then((data) => {
-              setError(data)
+              setErrors(data)
           })
           }
         }
@@ -106,32 +113,36 @@ function Login(){
 
     function LogoutButton(){
 
-        function CreateCharacter(e){
-            e.preventDefault()
-            console.log(e.target[0].value, e.target[1].value )
+        function CreateCharacter(event){
+            event.preventDefault()
+            event.target.reset()
+
+            console.log(event.target.backstory.value )
             fetch('/characters', {
               method: 'POST', 
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({name:e.target[0].value, backstory:e.target[1].value, combatant_id:loggedInUser.id}),
+              body: JSON.stringify({name:event.target[0].value, backstory:event.target[1].value, combatant_id:loggedInUser.id}),
             })
             .then((response) =>{
               if (response.ok){
                 response.json().then((data)=> {
                   setCharacters(data)
+                  setCharacterName('')
                 })
               }
               else{
                 response.json().then((data) => {
-                  setError(data)
+                  setErrors(data)
               })
               }
             }
           )
           }
         return(
-            <div >
+            <div id='topOfPage' >
+              <h2 id='userWelcome'>Welcome {loggedInUser.username}</h2>
               <div id='topButtons'>
             <Link to="Fallen">
               <button id='fallen' type='button'>Fallen Heros</button>
@@ -140,10 +151,14 @@ function Login(){
             <button id='logout' onClick={handleLogout}>Logout</button>
             </div>
             <form id='createCharaForm' onSubmit={CreateCharacter}>
-            <input className='inputField'
+              <h1 className='inputLabels'>New Character Name</h1>
+            <input className='inputField' id='characterName'
+              onChange={(e)=> setCharacterName(e.target.value)}
+              value={characterName}
               type="text"
               name="characterName"
             />
+            <h1 className='inputLabels'>New Character Backstory</h1>
             <textarea className='inputField' id='backstory'
               type="text"
               name="backstory"
@@ -151,9 +166,6 @@ function Login(){
             <button id='createCharaButton' type='submit'>Create Character</button>
           </form>
 
-          <Routes>
-              <Route path="Fallen" element={<DeadHeros />} />
-            </Routes>
           </div>
           
         )
@@ -170,7 +182,7 @@ function Login(){
 
     const ListOfAlive = characters.map((each)=>{
         return(
-            <div className='listOfCharas' key={each.id} style={{ backgroundImage:`url(${logo})` }} >
+            <div className='listOfCharas' key={each.id} >
             <h1 className='charaName'>{each.name}</h1>
             <p className='charaBackstory'>Backstory: {each.backstory}</p>
             <p className='stat'>Health: {each.health}</p>
@@ -192,8 +204,11 @@ function Login(){
 
         <div className="login">
 
-            {loggedInUser ? LogoutButton() : loginButton()}
+            {loggedInUser ? LogoutButton() : loginButton ()}
             {ListOfAlive}
+            <Routes>
+              <Route path="Fallen" element={<DeadHeros />} />
+            </Routes>
 
         </div>
     )

@@ -1,4 +1,9 @@
 .login{
+    background-image: url('../ArtAssets/CottageHearth.png');
+    background-position: 50% 80px;
+    background-repeat: no-repeat;
+    background-size: 1600px 800px;
+    text-shadow: rgb(253, 252, 252) 1px 0 10px;
     margin-left: 0.15%;
     margin-right: 0.15%;
     position: relative;
@@ -17,6 +22,7 @@
     border: 10px solid  rgb(238, 218, 189); ;
 }
 #loginScreen{
+    background: local;
     font-size: 50px;
     font-family: 'Alex Brush', cursive;
     text-align: center;
@@ -25,30 +31,35 @@
     padding-bottom: 900px;
 }
 #topButtons{
+    background: local;
     display: flex;
     justify-content: space-between;
     margin: 5px;
 }
 #loginHeader{
+    color: #0b2cec;
+    background: local;
     font-family: 'Alex Brush', cursive;
     font-size: 45px;
     text-align: center;
 }
 #logout{
-
+    color: #0b2cec;
+    width: 10%;
     font-family: 'Cookie', cursive;
     font-size: 60px ;
     cursor: pointer;
 
 }
 #fallen{
-
+    color: #c02929;
     height: 100%;
     font-family: 'Cookie', cursive;
     font-size: 60px ;
     cursor: pointer;
 }
 #createCharaForm{
+    background: local;
     display: grid;
     font-family: 'Cookie', cursive;
     width: 25%;
@@ -69,13 +80,15 @@
     cursor: pointer;
 }
 .listOfCharas{
+
     word-wrap: break-word;
     padding-bottom: 5%;
     margin-top: 3%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 27%;
+    margin-right: 27%;
     font-family: 'Cookie', cursive;
     color: rgb(0, 0, 0);
+    background-image: url('../ArtAssets/v2.gif');
     background-position: center bottom;
     background-size: 100% 110%;
     border: 33px outset #c02929;
@@ -101,4 +114,28 @@
     background: local;
     font-size: 40px;
     padding-left: 35%;
+}
+#topOfPage{
+    background: local;
+}
+.inputLabels{
+    text-shadow: rgb(243, 38, 11) 1px 0 10px;
+    color: rgb(16, 12, 240);
+    text-align: center;
+    background: local;
+}
+#userWelcome{
+    color: #ec0b0b;
+    text-shadow: rgb(11, 34, 243) 1px 0 10px;
+    font-family: 'Cookie', cursive;
+    font-size: 60px ;
+    cursor: pointer;
+    text-align: center;
+    background: local;
+}
+#loginMenu{
+    background: local;
+}
+#test{
+    background: local;
 }

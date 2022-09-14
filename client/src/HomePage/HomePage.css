@@ -1,20 +1,31 @@
 #header {
+    color: rgb(17, 17, 184);
+    background: local;
     font-size: 100px;
     text-align: center;
     padding-top: 100px;
     font-family: 'Alex Brush', cursive;
 }
 #warning{
+    color: rgb(17, 17, 180);
+    background: local;
     font-size: 70px;
     text-align: center;
     font-family: 'Alex Brush', cursive;
 }
 #mainBlurb{
+
+    background: local;
     padding: 30px;
     font-size: 40px;
     font-family: 'Cookie', cursive;
 }
 .wholePage{
+    text-shadow: rgb(253, 252, 252) 1px 0 10px;
+    background-image: url('../ArtAssets/WaterLake2.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 98% 90%;
     margin-left: 0.15%;
     margin-right: 0.15%;
     position: relative;

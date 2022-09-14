@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
            
           render json: user
       else 
-          render json: { error: "** Check Your Password **" }
+          render json: { error: "** Check Your Password **" }, status: :unauthorized
       end
     else
-      render json: { error: "Username OR Password Don't Match" }
+      render json: { error: "** Username OR Password Don't Match **" }, status: :unprocessable_entity
     end
 end
 

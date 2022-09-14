@@ -26,13 +26,19 @@ function Create (){
             }
             else{
               response.json().then((data) => {
-                setError(data)
+                setError(data.errors)
             })
             }
           }
         )
       }
-
+      const listOfErrors =
+      error.map((each)=>{
+        return(
+          <p>{each}</p>
+        )
+ 
+      })
     return(
       <div id='createAccount'>
         <h1>Create An Account And Begin Your Adventures.</h1>
@@ -63,6 +69,7 @@ function Create (){
             </label>
             <button id='createAccountButton' type="submit">Create Account</button>
         </form>
+        {listOfErrors}
       </div>
     )
 }
